@@ -32,7 +32,9 @@ namespace SportsStore
             services.AddTransient<IProductRepository, EFProductRepository>();
             
             services.AddMvc();
-           // services.AddTransient<IProductRepository, FakeProductRepository>();
+            // services.AddTransient<IProductRepository, FakeProductRepository>();
+            services.AddMemoryCache();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,18 +48,31 @@ namespace SportsStore
             app.UseDeveloperExceptionPage();
             app.UseStatusCodePages();
             app.UseStaticFiles();
+            app.UseSession();
             app.UseMvcWithDefaultRoute();
             //<DotNetCliToolReference Include="Microsoft.AspNetCore.Razor.Tools" Version="1.1.0-preview4-final"  />
 
-            app.UseMvc(routes =>
+            app.UseMvc(routes => 
             {
                 routes.MapRoute(
-                    name: "pagination",
-                    template: "Products/Page{page}",
-                    defaults: new { Controller = "Product", action = "List" });
-            
+                    name: null,
+                    template: "{category}/Page{pageNum:int}",
+                    defaults: new { Controller = "Product", action = "List",pageNum=1 });
                 routes.MapRoute(
-                    name: "default",
+                    name: null,
+                    template: "Page{pageNum:int}",
+                    defaults: new { Controller = "Product", action = "List",pageNum=1 });
+                routes.MapRoute(
+                    name: null,
+                    template: "Page{category}",
+                    defaults: new { Controller = "Product", action = "List" });
+                routes.MapRoute(
+                    name: null,
+                    template: "",
+                    defaults: new { Controller = "Product", action = "List" });
+
+                routes.MapRoute(
+                    name: null,
                     template: "{controller=Product}/{action=List}/{id?}");
                 
             });
