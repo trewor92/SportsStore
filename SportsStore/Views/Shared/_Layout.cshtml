@@ -4,12 +4,18 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>SportsStore</title>
-    <link rel="stylesheet" asp-href-include="lib/bootstrap/dist/css/*"/>
+    <link rel="stylesheet" asp-href-include="lib/bootstrap/dist/css/*" />
+    <link rel="stylesheet" asp-href-include="lib/fontawesome/css/*.css" />
+
 
 </head>
 <body>
     <div class="navbar navbar-inverse" role="navigation">
         <a class="navbar-brand" href="#">SPORTS STORE</a>
+        <div class="pull-right">
+            @await Component.InvokeAsync("CartSummary")
+
+        </div>
     </div>
       
     <div class="row panel">
