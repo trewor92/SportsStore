@@ -13,8 +13,8 @@ namespace SportsStore.Models
         public static void EnsurePopulated(IApplicationBuilder app)
         {
             var serviceScope = app.ApplicationServices.CreateScope();
-            
-                ApplicationDbContext context = serviceScope.ServiceProvider
+
+            ApplicationDbContext context = serviceScope.ServiceProvider
                 .GetService<ApplicationDbContext>();
             
 

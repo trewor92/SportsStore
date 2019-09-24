@@ -18,7 +18,13 @@
 
 <body class="panel panel-default">
     <div class="panel-heading">
-        <h4>@ViewBag.Title</h4>    
+        <h4>
+        @ViewBag.Title
+        
+        <a class="btn btn-sm btn-primary pull-right"
+            asp-action="Logout" asp-controller="Account"> Log Out </a>
+        </h4>   
+        
     </div>
     
 

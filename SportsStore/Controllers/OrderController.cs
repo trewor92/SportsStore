@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SportsStore.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SportsStore.Controllers
 {
@@ -12,9 +13,11 @@ namespace SportsStore.Controllers
         IOrderRepository _repository;
         Cart _cart;
 
+        [Authorize]
         public ViewResult List() => View(_repository.Orders.Where(o => !o.Shipped));
 
         [HttpPost]
+        [Authorize]
         public IActionResult MarkShipped(int orderID)
         {
             Order order = _repository.Orders.FirstOrDefault(o => o.OrderID == orderID);
